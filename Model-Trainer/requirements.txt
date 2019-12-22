@@ -1,0 +1,13 @@
+#Cython
+matplotlib
+numpy
+opencv-python
+pandas
+pillow
+pylint
+#pycocotools workaround de compatibilidade para Python 3
+#git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+scikit-image
+#shutil
+tensorflow==1.15
+#tensorflow-serving-api==1.15

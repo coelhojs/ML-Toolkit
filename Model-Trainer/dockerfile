@@ -1,0 +1,15 @@
+FROM "ubuntu:bionic"
+FROM python:3.7
+RUN apt-get update && yes | apt-get upgrade
+RUN mkdir -p /model-trainer
+ADD ./ /model-trainer
+WORKDIR /model-trainer
+RUN ls
+#RUN apt-get install -y git
+RUN apt-get install -y protobuf-compiler python-pil python-lxml
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+#RUN git clone https://github.com/tensorflow/models.git /tensorflow/models
+RUN protoc object_detection/protos/*.proto --python_out=.
+RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+# CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/tensorflow/models/research/object_detection", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
