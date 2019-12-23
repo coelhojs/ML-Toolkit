@@ -8,18 +8,17 @@ python generate_tfrecord.py --label=<LABEL> --csv_input=<PATH_TO_ANNOTATIONS_FOL
 python generate_tfrecord.py --label=<LABEL> --csv_input=<PATH_TO_ANNOTATIONS_FOLDER>/test_labels.csv  --output_path=<PATH_TO_ANNOTATIONS_FOLDER>/test.record
 """
 
-from __future__ import division
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import absolute_import, division, print_function
 
-import os
 import io
-import pandas as pd
-import tensorflow as tf
+import os
+from collections import OrderedDict, namedtuple
 
 from PIL import Image
-from utils import dataset_util
-from collections import namedtuple, OrderedDict
+
+import dataset_util
+import pandas as pd
+import tensorflow as tf
 
 
 # TODO: replace this with label map or automate (maybe with args?)

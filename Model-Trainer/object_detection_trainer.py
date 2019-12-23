@@ -1,17 +1,14 @@
 # - *- coding: utf- 8 - *-
 import argparse
+import subprocess
 
 print("Definindo as variaveis de ambiente...")
 
-from utils import xml_to_csv
-from utils import generate_tf_record
+from object_detection.utils import xml_to_csv
+from object_detection.utils import generate_tf_record
 from object_detection import model_main as train
 
 if __name__ == "__main__":
-
-    # model_name = 'vera_base_itens'
-    # train_steps = '30000'
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", help="Nome do modelo que será treinado.")
     parser.add_argument("--steps", type=int,
@@ -43,5 +40,4 @@ if __name__ == "__main__":
     training_folder = 'workspace/intermediate_files/training'
     config = 'workspace/{model_name}.config'.format(model_name=model_name)
 
-    train.main(['--model_dir=workspace/intermediate_files/training',
-           '--pipeline_config_path=workspace/{model_name}.config'.format(model_name=model_name)])
+    subprocess.run(["python", "./object_detection/model_main.py", "--model_dir=workspace/intermediate_files/training", "--pipeline_config_path=workspace/{model_name}.config".format(model_name=model_name)])
