@@ -4,8 +4,9 @@ RUN apt-get update && yes | apt-get upgrade
 RUN mkdir -p /model-trainer
 ADD ./ /model-trainer
 WORKDIR /model-trainer
-RUN apt-get install -y protobuf-compiler python3 python3-pip
+RUN apt-get install -y git protobuf-compiler python3 python3-pip
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
+RUN pip3 install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 RUN protoc object_detection/protos/*.proto --python_out=.
 RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim

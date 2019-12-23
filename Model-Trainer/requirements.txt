@@ -1,4 +1,4 @@
-Cython
+Cython #Deve ser instalado numa etapa anterior a instalação do pycocotools
 lxml
 matplotlib
 numpy
@@ -7,7 +7,7 @@ pandas
 pillow
 pylint
 #pycocotools workaround de compatibilidade para Python 3
-git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+#git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 scikit-image
 #shutil
 tensorflow==1.15
