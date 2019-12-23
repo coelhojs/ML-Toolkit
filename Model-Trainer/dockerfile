@@ -1,5 +1,7 @@
-FROM "ubuntu:bionic"
+FROM "ubuntu:disco"
 FROM python:3.7
+FROM tensorflow/tensorflow:1.15.0
+LABEL maintainer="ccoelho.me@gmail.com"
 RUN apt-get update && yes | apt-get upgrade
 RUN mkdir -p /model-trainer
 ADD ./ /model-trainer
@@ -12,4 +14,5 @@ RUN pip install --upgrade pip && \
 #RUN git clone https://github.com/tensorflow/models.git /tensorflow/models
 RUN protoc object_detection/protos/*.proto --python_out=.
 RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/object_detection/tools
 # CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/tensorflow/models/research/object_detection", "--ip=0.0.0.0", "--port=8888", "--no-browser"]

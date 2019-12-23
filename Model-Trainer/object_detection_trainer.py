@@ -1,3 +1,4 @@
+# - *- coding: utf- 8 - *-
 import argparse
 
 print("Definindo as variaveis de ambiente...")
