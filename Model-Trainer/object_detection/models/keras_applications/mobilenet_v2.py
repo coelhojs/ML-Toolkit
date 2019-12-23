@@ -21,7 +21,7 @@ from __future__ import print_function
 import tensorflow as tf
 
 from object_detection.core import freezable_batch_norm
-from object_detection.utils import ops
+from utils import ops
 
 
 # pylint: disable=invalid-name

@@ -26,9 +26,9 @@ from object_detection.core import region_similarity_calculator as sim_calc
 from object_detection.core import target_assigner
 from object_detection.meta_architectures import ssd_meta_arch
 from object_detection.protos import model_pb2
-from object_detection.utils import ops
-from object_detection.utils import test_case
-from object_detection.utils import test_utils
+from utils import ops
+from utils import test_case
+from utils import test_utils
 
 slim = tf.contrib.slim
 keras = tf.keras.layers

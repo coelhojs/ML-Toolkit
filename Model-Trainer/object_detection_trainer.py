@@ -1,11 +1,30 @@
 # - *- coding: utf- 8 - *-
 import argparse
 import subprocess
+import os
+import sys
+
+ROOT = os.getcwd()
 
 print("Definindo as variaveis de ambiente...")
 
-from object_detection.utils import xml_to_csv
-from object_detection.utils import generate_tf_record
+sys.path.append(ROOT)
+sys.path.append('{ROOT}\\object_detection\\slim'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection'.format(ROOT=ROOT))
+sys.path.append(
+    '{ROOT}\\object_detection\\builders'.format(ROOT=ROOT))
+sys.path.append(
+    '{ROOT}\\object_detection\\models'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection\\slim\\datasets'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection\\slim\\deployments'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection\\slim\\nets'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection\\slim\\preprocessing'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\object_detection\\slim\\scripts'.format(ROOT=ROOT))
+sys.path.append('{ROOT}\\utils'.format(ROOT=ROOT))
+
+
+from utils import xml_to_csv
+from utils import generate_tf_record
 from object_detection import model_main as train
 
 if __name__ == "__main__":

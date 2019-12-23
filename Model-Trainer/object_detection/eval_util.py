@@ -25,11 +25,11 @@ from object_detection.core import box_list_ops
 from object_detection.core import keypoint_ops
 from object_detection.core import standard_fields as fields
 from object_detection.metrics import coco_evaluation
-from object_detection.utils import label_map_util
-from object_detection.utils import object_detection_evaluation
-from object_detection.utils import ops
-from object_detection.utils import shape_utils
-from object_detection.utils import visualization_utils as vis_utils
+from utils import label_map_util
+from utils import object_detection_evaluation
+from utils import ops
+from utils import shape_utils
+from utils import visualization_utils as vis_utils
 
 slim = tf.contrib.slim
 

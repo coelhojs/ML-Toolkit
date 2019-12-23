@@ -28,8 +28,8 @@ from object_detection.builders import graph_rewriter_builder
 from object_detection.builders import model_builder
 from object_detection.core import standard_fields as fields
 from object_detection.data_decoders import tf_example_decoder
-from object_detection.utils import config_util
-from object_detection.utils import shape_utils
+from utils import config_util
+from utils import shape_utils
 
 slim = tf.contrib.slim
 

@@ -18,8 +18,8 @@ import tensorflow as tf
 
 from object_detection.core import standard_fields
 from object_detection.metrics import coco_tools
-from object_detection.utils import json_utils
-from object_detection.utils import object_detection_evaluation
+from utils import json_utils
+from utils import object_detection_evaluation
 
 
 class CocoDetectionEvaluator(object_detection_evaluation.DetectionEvaluator):

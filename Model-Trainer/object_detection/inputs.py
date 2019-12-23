@@ -32,9 +32,9 @@ from object_detection.protos import eval_pb2
 from object_detection.protos import input_reader_pb2
 from object_detection.protos import model_pb2
 from object_detection.protos import train_pb2
-from object_detection.utils import config_util
-from object_detection.utils import ops as util_ops
-from object_detection.utils import shape_utils
+from utils import config_util
+from utils import ops as util_ops
+from utils import shape_utils
 
 HASH_KEY = 'hash'
 HASH_BINS = 1 << 31

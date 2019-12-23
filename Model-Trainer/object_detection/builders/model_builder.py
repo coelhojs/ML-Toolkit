@@ -52,7 +52,7 @@ from object_detection.models.ssd_pnasnet_feature_extractor import SSDPNASNetFeat
 from object_detection.predictors import rfcn_box_predictor
 from object_detection.predictors.heads import mask_head
 from object_detection.protos import model_pb2
-from object_detection.utils import ops
+from utils import ops
 
 # A map of names to SSD feature extractors.
 SSD_FEATURE_EXTRACTOR_CLASS_MAP = {
