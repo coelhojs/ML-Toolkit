@@ -3,8 +3,8 @@ import argparse
 
 print("Definindo as variaveis de ambiente...")
 
-from tools import xml_to_csv
-from tools import generate_tf_record
+from utils import xml_to_csv
+from utils import generate_tf_record
 from object_detection import model_main as train
 
 if __name__ == "__main__":

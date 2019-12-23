@@ -1,4 +1,5 @@
 #Cython
+lxml
 matplotlib
 numpy
 opencv-python
