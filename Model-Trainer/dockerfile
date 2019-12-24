@@ -9,9 +9,10 @@ ADD train_scripts/image_classification_trainer.py /research/image_classification
 ADD train_scripts/object_detection_trainer.py /research/object_detection/
 ADD utils/. /research/object_detection/utils/
 ADD requirements.txt /research/
-WORKDIR /research
-RUN protoc object_detection/protos/*.proto --python_out=.
-RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+ADD entrypoint.sh /usr/local/bin/
+RUN chmod 777 /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+WORKDIR /research/
 RUN mkdir workspace
 RUN python3 setup.py install
 RUN pip3 install --upgrade pip
