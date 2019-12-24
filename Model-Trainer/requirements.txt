@@ -1,11 +1,10 @@
-Cython #Deve ser instalado numa etapa anterior a instalação do pycocotools
+#Cython #Deve ser instalado numa etapa anterior a instalacao do pycocotools
 lxml
-matplotlib
+#matplotlib
 numpy
 opencv-python
 pandas
-pillow
-pylint
+#Pillow
 #pycocotools workaround de compatibilidade para Python 3
 #git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 scikit-image
