@@ -20,6 +20,7 @@ if __name__ == "__main__":
     if args.steps:
         train_steps = args.steps
 
+
     print("Gerando os CSVs a partir dos XMLs...")
 
     xml_to_csv.main('workspace/images/train',
@@ -40,4 +41,4 @@ if __name__ == "__main__":
     training_folder = 'workspace/intermediate_files/training'
     config = 'workspace/{model_name}.config'.format(model_name=model_name)
 
-    subprocess.run(["python", "./object_detection/model_main.py", "--model_dir=workspace/intermediate_files/training", "--pipeline_config_path=workspace/{model_name}.config".format(model_name=model_name)])
+    subprocess.run(["python3", "./object_detection/model_main.py", "--model_dir=workspace/intermediate_files/training", "--pipeline_config_path=workspace/{model_name}.config".format(model_name=model_name)])

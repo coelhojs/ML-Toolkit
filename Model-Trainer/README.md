@@ -24,7 +24,14 @@ docker commit unruffled_nash
 docker tag 75874ec model-trainer-1.0
 
 # Comando funcional:
-docker run --rm -it -v "/develpment/workspace/:/research/workspace" -w "/research/workspace" ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+docker run --rm -it -v "/develpment/workspace/:/research/workspace/" ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+
+docker run --rm -it -v "/develpment/workspace/:/workspace" -w "/research/workspace" ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+
+docker run -it --name test --mount type=bind,source="/development/workspace,target=/app ml-trainer
+
+
+docker run --mount type=bind,source=/home/cristiano/development/workspace,target=/research/workspace ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
 
 
 Edição do container:
