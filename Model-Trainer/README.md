@@ -4,9 +4,6 @@ docker create --name model-trainer python:3.7
 # Build do container
 docker build -t ml-trainer .
 
-
-docker run --rm -it -v C:\Workspace:/workspace ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
-
 docker run --name tensorflow -p 8888:8888 -d tensorflow
 
 # Para copiar arquivos para o container ativo:
@@ -23,15 +20,14 @@ docker commit unruffled_nash
 # Adicionar tag ao novo container
 docker tag 75874ec model-trainer-1.0
 
-# Comando funcional:
-docker run --rm -it -v "/develpment/workspace/:/research/workspace/" ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+# Comando desejado:
+    docker run ml-trainer --mount type=bind,source=/C/Workspace,target=/research/workspace -e SCRIPT=object_detection MODEL_NAME=vera_base_itens
 
-docker run --rm -it -v "/develpment/workspace/:/workspace" -w "/research/workspace" ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+# Ubuntu
+    docker run --mount type=bind,source=/home/cristiano/development/workspace,target=/research/workspace ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
 
-docker run -it --name test --mount type=bind,source="/development/workspace,target=/app ml-trainer
-
-
-docker run --mount type=bind,source=/home/cristiano/development/workspace,target=/research/workspace ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
+# Windows
+    docker run --mount type=bind,source=/C/Workspace,target=/research/workspace -e MODEL_NAME=vera_base_itens -t ml-trainer &
 
 
 Edição do container:
