@@ -27,7 +27,7 @@ docker tag 75874ec model-trainer-1.0
     docker run --mount type=bind,source=/home/cristiano/development/workspace,target=/research/workspace ml-trainer python3 ./object_detection/object_detection_trainer.py --model=vera_base_itens --steps=30000
 
 # Windows
-    docker run --mount type=bind,source=/C/Workspace,target=/research/workspace -e MODEL_NAME=vera_base_itens -t ml-trainer &
+    docker run -t --rm --mount type=bind,source=/C/Workspace,target=/research/workspace -e MODEL_NAME=vera_base_itens ml-trainer python3 ./object_detection/model_main.py --logtostderr --model_dir=workspace/intermediate_files/training --pipeline_config_path=workspace/vera_base_itens.config
 
 
 Edição do container:

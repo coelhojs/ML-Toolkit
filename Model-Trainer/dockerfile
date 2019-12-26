@@ -21,7 +21,7 @@ RUN pip3 install git+https://github.com/philferriere/cocoapi.git#subdirectory=Py
 RUN echo '#!/bin/bash \n\n\
     protoc object_detection/protos/*.proto --python_out=. && \
     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim && \
-    python3 ./object_detection/object_detection_trainer.py --model=${MODEL_NAME} && \
     "$@"' > /usr/bin/object_detection_trainer_entrypoint.sh \
     && chmod +x /usr/bin/object_detection_trainer_entrypoint.sh
 ENTRYPOINT ["/usr/bin/object_detection_trainer_entrypoint.sh"]
+

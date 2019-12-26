@@ -6,7 +6,7 @@ import sys
 
 from utils import xml_to_csv
 from utils import generate_tf_record
-import model_main as train
+from legacy import train
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -37,8 +37,3 @@ if __name__ == "__main__":
         'workspace/annotations/test_labels.csv', 'workspace/images/test', 'workspace/annotations/test.record')
 
     print("Iniciando o treinamento...")
-
-    training_folder = 'workspace/intermediate_files/training'
-    config = 'workspace/{model_name}.config'.format(model_name=model_name)
-
-    subprocess.run(["python3", "./object_detection/model_main.py", "--model_dir=workspace/intermediate_files/training", "--pipeline_config_path=workspace/{model_name}.config".format(model_name=model_name)])
