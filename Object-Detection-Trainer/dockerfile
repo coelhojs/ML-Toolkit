@@ -1,0 +1,27 @@
+FROM "ubuntu:bionic"
+LABEL mantainer="ccoelho.me@gmail.com"
+RUN apt-get update && yes | apt-get upgrade
+RUN apt-get install -y git protobuf-compiler python3-pip
+# RUN git clone --branch v1.13.0 --depth 1 https://github.com/tensorflow/models.git 
+ADD research/. /research/
+ADD train_scripts/image_classification_trainer.py /research/image_classification/
+ADD train_scripts/object_detection_trainer.py /research/object_detection/
+ADD utils/. /research/object_detection/utils/
+ADD requirements.txt /research/
+ADD entrypoint.sh /research/
+WORKDIR /research
+RUN protoc object_detection/protos/*.proto --python_out=.
+RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+RUN python3 setup.py install    
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+RUN pip3 install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+    # cd /research \
+    #protoc object_detection/protos/*.proto --python_out=. \
+# RUN echo '#!/bin/bash \n\n\
+#     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim && \
+#     "$@"' > /research/object_detection_trainer_entrypoint.sh \
+    # && chmod +x /research/object_detection_trainer_entrypoint.sh
+RUN chmod +x /research/entrypoint.sh
+#CMD ["/research/entrypoint.sh"]
+
