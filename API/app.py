@@ -1,3 +1,4 @@
+import json
 from Image_Classification import Image_Classification
 from Response import Response
 from flask import Flask, jsonify, request
@@ -15,7 +16,7 @@ def vera_species_classify():
 
         response.set_results(results)
 
-        return jsonify(response)
+        return json.dumps(response.__dict__)
         
     except Exception as error:
         raise error
