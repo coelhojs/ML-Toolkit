@@ -1,21 +1,28 @@
-class TF_Serving_Request: 
-	Headers = {"content-type": "application/json"}
+import json
+import numpy as np
+import utils
+import requests
+
+class TF_Serving: 
+    Headers = {"content-type": "application/json"}
     Images = []
+    Labels = []
     Url = ""
 
 
-	# default constructor 
-	def __init__(requestId, method): 
-		self.RequestId = requestId
-        self.Detections = []
+    # default constructor 
+    def __init__(self, url, images, labels): 
+        self.Images = images
+        self.Labels = labels
+        self.Url = url
 
 
-    def call_img_classification():
-        print(f'\n\nMaking request to {server_url}...\n')
+    def call_img_classification(self):
+        print(f'\n\nMaking request to {self.Url}...\n')
         for image_path in self.Images:
             # Converte o arquivo num float array
-            formatted_json_input = img_util.classification_pre_process(image_path)
-            server_response = requests.post(server_url, data=formatted_json_input, headers=headers)
+            formatted_json_input = utils.classification_pre_process(image_path)
+            server_response = requests.post(self.Url, data=formatted_json_input, headers=self.Headers)
             print(server_response)
 
             # Decoding results from TensorFlow Serving server
@@ -23,7 +30,7 @@ class TF_Serving_Request:
             predictions = np.squeeze(pred['predictions'][0])
             results = []
             top_k = predictions.argsort()[-5:][::-1]
-            labels = load_labels(label_file)
+            labels = self.Labels
             for i in top_k:
                 label = labels[i]
                 score = float(predictions[i])

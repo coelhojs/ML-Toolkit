@@ -4,31 +4,31 @@ import requests
 class Image_Classification:
     Images: []
     Model: ""
+    Url: ""
     User: ""
 
-    # default constructor 
-	def __init__(images, model): 
-		self.Images = images
+    def __init__(self, images, model, config): 
+        self.Images = images
         self.Model = model
+        self.Config = config
 
 
-    def species_classifier():
-    # TODO: Utilizar try/catch para registro de logs e garantir que as requisições vieram parametrizadas corretamente
-    #Tenta conexão com Tensorflow Serving, se não conseguir conectar, usar script local:
-    try:
-        #test_request
-        requests.get(config.vera_species['test_url'])
+    def classification_caller(self):
+        try:
+            #TF-Serving test_request
+            requests.get(self.config['test_url'])
 
-        print("Tensorflow Serving detectado. Utilizando para classificação")
+            print("Utilizando Tensorflow Serving para classificação.")
 
-        prediction = TF_Serving(config.vera_species['prediction_url'], self.Images)
+            prediction = TF_Serving(self.config['serving_url'], self.Images, utils.load_labels(self.config['label_map']))
 
-        return prediction.call_img_classification()
+            return prediction.call_img_classification()
 
-    except:
-        print("Tensorflow Serving não detectado. Utilizando scripts locais")
-        #Alterar essa chamada para usar docker
-        response.Results = image_classifier(request.json['Images'], model_path, label_file)
+        except:
+            print("Tensorflow Serving não detectado. Utilizando scripts locais")
+            
+            #Alterar essa chamada para usar docker
+            # response.Results = image_classifier(self.Images, model_path, label_file)
 
-    # Returning JSON response to the frontend
-    return jsonify(response)
+            # Returning JSON response to the frontend
+            # return jsonify(response)

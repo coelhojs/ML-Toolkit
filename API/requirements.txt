@@ -1,0 +1,5 @@
+Flask
+redis
+celery
+requests
+tensorflow==1.15

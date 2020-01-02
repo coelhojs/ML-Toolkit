@@ -24,4 +24,3 @@ RUN pip3 install git+https://github.com/philferriere/cocoapi.git#subdirectory=Py
     # && chmod +x /research/object_detection_trainer_entrypoint.sh
 RUN chmod +x /research/entrypoint.sh
 #CMD ["/research/entrypoint.sh"]
-
