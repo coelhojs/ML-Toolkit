@@ -1,8 +1,11 @@
 import json
+
+from flask import Flask, jsonify, request
+
+import config
 from Image_Classification import Image_Classification
 from Response import Response
-from flask import Flask, jsonify, request
-import config
+
 app = Flask(__name__)
 
 @app.route('/vera_species/classify/', methods=['POST'])

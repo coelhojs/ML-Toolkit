@@ -1,7 +1,10 @@
 import json
+
 import numpy as np
-import utils
 import requests
+
+import utils
+
 
 class TF_Serving: 
     Headers = {"content-type": "application/json"}

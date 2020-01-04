@@ -2,9 +2,12 @@ import requests
 
 import config
 import utils
+from Inference import Inference
 from TF_Serving import TF_Serving
 
+
 class Image_Classification:
+    Config = ""
     Images: []
     Model: ""
     Url: ""
@@ -27,12 +30,9 @@ class Image_Classification:
 
             return prediction.call_img_classification()
 
-        except Exception as error:
+        except:
             print("Tensorflow Serving não detectado. Utilizando scripts locais")
-            raise error
-            
-            #Alterar essa chamada para usar docker
-            # response.Results = image_classifier(self.Images, model_path, label_file)
+                        
+            inference = Inference(self.Config)
 
-            # Returning JSON response to the frontend
-            # return jsonify(response)
+            return inference.image_classifier(self.Images)
