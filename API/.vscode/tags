@@ -1,0 +1,55 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Config	../Image_Classification.py	/^    Config = ""$/;"	kind:variable	line:10
+Config	../Object_Detection.py	/^    Config = ""$/;"	kind:variable	line:10
+Headers	../TF_Serving.py	/^    Headers = {"content-type": "application\/json"}$/;"	kind:variable	line:10
+Image_Classification	../Image_Classification.py	/^class Image_Classification:$/;"	kind:class	line:9
+Image_Classification.py	../Image_Classification.py	1;"	kind:file	line:1
+Images	../TF_Serving.py	/^    Images = []$/;"	kind:variable	line:11
+Inference	../Inference.py	/^class Inference:$/;"	kind:class	line:5
+Inference.py	../Inference.py	1;"	kind:file	line:1
+Labels	../TF_Serving.py	/^    Labels = []$/;"	kind:variable	line:12
+Method	../Response.py	/^    Method = ""$/;"	kind:variable	line:3
+Model	../Response.py	/^    Model = ""$/;"	kind:variable	line:4
+Object_Detection.py	../Object_Detection.py	1;"	kind:file	line:1
+Object_detection	../Object_Detection.py	/^class Object_detection:$/;"	kind:class	line:9
+RequestId	../Response.py	/^    RequestId = ""$/;"	kind:variable	line:2
+Response	../Response.py	/^class Response: $/;"	kind:class	line:1
+Response.py	../Response.py	1;"	kind:file	line:1
+Results	../Response.py	/^    Results = []$/;"	kind:variable	line:5
+Results	../TF_Serving.py	/^    Results = []$/;"	kind:variable	line:13
+TF_Serving	../TF_Serving.py	/^class TF_Serving: $/;"	kind:class	line:9
+TF_Serving.py	../TF_Serving.py	1;"	kind:file	line:1
+Url	../TF_Serving.py	/^    Url = ""$/;"	kind:variable	line:14
+__init__	../Image_Classification.py	/^    def __init__(self, images, model, config, remote_addr): $/;"	kind:member	line:14
+__init__	../Inference.py	/^    def __init__(self, config): $/;"	kind:member	line:11
+__init__	../Object_Detection.py	/^    def __init__(self, images, model, config, remote_addr): $/;"	kind:member	line:14
+__init__	../Response.py	/^    def __init__(self, requestId, method, model): $/;"	kind:member	line:8
+__init__	../TF_Serving.py	/^    def __init__(self, url, images, labels): $/;"	kind:member	line:16
+add_results	../Response.py	/^    def add_results(self, image_path, results): $/;"	kind:member	line:15
+app	../app.py	/^app = Flask(__name__)$/;"	kind:variable	line:10
+app.py	../app.py	1;"	kind:file	line:1
+call_img_classification	../TF_Serving.py	/^    def call_img_classification(self):$/;"	kind:member	line:22
+call_obj_detection	../TF_Serving.py	/^    def call_obj_detection(self):$/;"	kind:member	line:43
+classification_caller	../Image_Classification.py	/^    def classification_caller(self):$/;"	kind:member	line:20
+config.py	../config.py	1;"	kind:file	line:1
+detection_caller	../Object_Detection.py	/^    def detection_caller(self):$/;"	kind:member	line:20
+image_classifier	../Inference.py	/^    def image_classifier(self, images_list, input_layer = "Placeholder", output_layer = "final_result"):$/;"	kind:member	line:17
+load_graph	../Inference.py	/^    def load_graph(self, model_path):$/;"	kind:member	line:56
+load_image_into_numpy_array	../utils.py	/^def load_image_into_numpy_array(image):$/;"	kind:function	line:17
+load_labels	../Inference.py	/^    def load_labels(self, label_file):$/;"	kind:member	line:68
+load_labels	../utils.py	/^def load_labels(label_file):$/;"	kind:function	line:9
+post_process	../utils.py	/^def post_process(server_response, image_path, labels):$/;"	kind:function	line:43
+pre_process	../utils.py	/^def pre_process(image_path):$/;"	kind:function	line:23
+read_tensor_from_image_file	../Inference.py	/^    def read_tensor_from_image_file(self, image_path,$/;"	kind:member	line:76
+set_results	../Response.py	/^    def set_results(self, results):$/;"	kind:member	line:19
+utils.py	../utils.py	1;"	kind:file	line:1
+validate_paths	../utils.py	/^def validate_paths(images, remote_addr):$/;"	kind:function	line:78
+vera_poles_trees_detect	../app.py	/^def vera_poles_trees_detect():$/;"	kind:function	line:30
+vera_species	../config.py	/^vera_species = {$/;"	kind:variable	line:3
+vera_species_classify	../app.py	/^def vera_species_classify():$/;"	kind:function	line:13
+vera_species_retrain	../app.py	/^def vera_species_retrain():$/;"	kind:function	line:47

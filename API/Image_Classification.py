@@ -1,7 +1,7 @@
 import requests
 
 import config
-import utils
+from utils import img_utils
 from Inference import Inference
 from TF_Serving import TF_Serving
 
@@ -10,11 +10,9 @@ class Image_Classification:
     Config = ""
     Images: []
     Model: ""
-    Url: ""
-    User: ""
 
-    def __init__(self, images, model, config): 
-        self.Images = images
+    def __init__(self, images, model, config, remote_addr): 
+        self.Images = img_utils.validate_paths(images, remote_addr)
         self.Model = model
         self.Config = config
 
@@ -26,7 +24,7 @@ class Image_Classification:
 
             print("Utilizando Tensorflow Serving para classificação.")
 
-            prediction = TF_Serving(self.Config['serving_url'], self.Images, utils.load_labels(self.Config['label_map']))
+            prediction = TF_Serving(self.Config['serving_url'], self.Images, img_utils.load_labels(self.Config['label_map']))
 
             return prediction.call_img_classification()
 
