@@ -31,6 +31,6 @@ class Image_Classification:
         except:
             print("Tensorflow Serving não detectado. Utilizando scripts locais")
                         
-            inference = Inference(self.Config)
+            inference = Inference(self.Config, "image_classification")
 
             return inference.image_classifier(self.Images)

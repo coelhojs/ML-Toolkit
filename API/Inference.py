@@ -12,8 +12,9 @@ class Inference:
     Labels: ""
 
 
-    def __init__(self, config): 
-        self.Graph = self.load_graph(config['graph'])
+    def __init__(self, config, method): 
+        self.Method = method
+        self.Graph = self.load_graph(config['graph'], self.Method)
         self.Labels = self.load_labels(config['label_map'])
 
 
@@ -62,8 +63,13 @@ class Inference:
 
         return response
 
+    def load_graph(self, model_path, method):
+        if (method=="image_classification"):
+            return self.load_classification_graph(model_path)
+        elif (method=="object_detection"):
+            return self.load_detection_graph(model_path)
 
-    def load_graph(self, model_path):
+    def load_classification_graph(self, model_path):
         graph = tf.Graph()
         graph_def = tf.GraphDef()
 
@@ -73,6 +79,18 @@ class Inference:
             tf.import_graph_def(graph_def)
 
         return graph
+
+    def load_detection_graph(self, model_path):
+        graph = tf.Graph()
+        with graph.as_default():
+            od_graph_def = tf.compat.v1.GraphDef()
+            with tf.io.gfile.GFile(model_path, 'rb') as fid:
+                serialized_graph = fid.read()
+                od_graph_def.ParseFromString(serialized_graph)
+                tf.import_graph_def(od_graph_def, name='')
+
+        return graph
+
 
 
     def load_labels(self, label_file):
@@ -172,11 +190,4 @@ class Inference:
 
                 output_dict = img_utils.post_process(output_dict, image_path, labels)
 
-        inference_dict = {}
-        inference_dict['ImagePath'] = image_path
-        inference_dict['Class'] = output_dict['detection_classes']
-        inference_dict['BoundingBoxes'] = output_dict['detection_boxes'].tolist()
-        inference_dict['Score'] = np.array(output_dict['detection_scores']).tolist()
-        inference_dict['NumDetections'] = output_dict['num_detections']
-
-        return inference_dict
+        return output_dict

@@ -31,6 +31,6 @@ class Object_Detection:
         except:
             print("Tensorflow Serving não detectado. Utilizando scripts locais")
                         
-            inference = Inference(self.Config)
+            inference = Inference(self.Config, "object_detection")
 
             return inference.objects_detector(self.Images)
