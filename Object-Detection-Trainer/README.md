@@ -3,7 +3,7 @@ docker create --name model-trainer python:3.7
 
 # Build do container
 docker build -t ml-trainer .
-
+docker build -t ml-trainer .
 docker run --name tensorflow -p 8888:8888 -d tensorflow
 
 # Para copiar arquivos para o container ativo:

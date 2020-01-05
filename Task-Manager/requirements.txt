@@ -1,0 +1,6 @@
+celery
+flower
+matplotlib
+Pillow
+requests
+tensorflow==1.15.0

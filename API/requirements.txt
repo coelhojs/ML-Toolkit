@@ -1,7 +1,2 @@
-Flask
-redis
 celery
-requests
-tensorflow==1.15.0
-Pillow
-matplotlib
+Flask

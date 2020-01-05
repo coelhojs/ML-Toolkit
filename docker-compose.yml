@@ -1,31 +1,36 @@
-# A docker-compose must always start by the version tag.
-# We use "3" because it's the last version at this time.
 version: "3"
-
-# You should know that docker-composes works with services.
-# 1 service = 1 container.
-# For example, a service maybe, a server, a client, a database...
-# We use the keyword 'services' to start to create services.
 services:
     server:
-        build: API/
+        build: ./API/
         ports:
-        - 5000:5000
+            - 5001:5001
+        restart: always
+        depends_on: 
+            - redis
+    monitor:
+        build: ./Task-Manager/
+        ports:
+            - 5555:5555
+        entrypoint: flower
+        command:  -A tasks --port=5555 --broker=redis://redis:6379/0
+        depends_on:
+            - redis
     redis:
         image: redis
-        network_mode: host
-        command: celery worker -A API/app.client --loglevel=info
-        depends_on: 
-            - server
-        ports:
-            - 6379:6379
     tf-serving:
         image: tensorflow/serving
         network_mode: host
         command: --model_config_file=/models/models.config
         depends_on:
-            - server
+            - redis
         ports:
             - 8501:8501
+        restart: always
         volumes:
             -  /home/cristiano/development/ML-Toolkit/Tensorflow-Serving/models:/models/
+    worker:
+        build:
+            context: ./Task-Manager/
+            dockerfile: Dockerfile
+        depends_on:
+            - redis
