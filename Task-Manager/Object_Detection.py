@@ -1,6 +1,5 @@
 import requests
 
-import config
 from utils import img_utils
 from Inference import Inference
 from TF_Serving import TF_Serving

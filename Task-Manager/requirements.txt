@@ -2,5 +2,6 @@ celery
 flower
 matplotlib
 Pillow
+redis
 requests
 tensorflow==1.15.0

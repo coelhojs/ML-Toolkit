@@ -1,7 +1,6 @@
 import json
 
 import celery.states as states
-import config
 from celery import Celery
 from flask import Flask, jsonify, request, url_for
 from worker import celery
@@ -10,8 +9,9 @@ app = Flask(__name__)
 
 @app.route('/vera_species/classify/', methods=['POST'])
 def vera_species_classify():
-    try:    
-        task = celery.send_task('tasks.vera_species_classify', args=[request, config['vera_species']], kwargs={})
+    try:
+        task = celery.send_task('tasks.vera_species_classify', args=[request.json, request.remote_addr], kwargs={})
+
         response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
         return response
     except Exception as error:
@@ -21,11 +21,20 @@ def vera_species_classify():
 @app.route('/vera_poles_trees/detect/', methods=['POST'])
 def vera_poles_trees_detect():
     try:    
-        task = celery.send_task('tasks.vera_poles_trees_detect', args=[request, config['vera_poles_trees']], kwargs={})
+        task = celery.send_task('tasks.vera_poles_trees_detect', args=[request.json, request.remote_addr], kwargs={})
         response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
         return response
     except Exception as error:
         raise error
+
+
+@app.route('/progress/<string:task_id>')
+def check_task(task_id: str) -> str:
+    res = celery.AsyncResult(task_id)
+    if res.state == states.PENDING:
+        return res.state
+    else:
+        return str(res.result)
 
 
 # @app.route('/vera_species/retrain/', methods=['POST'])

@@ -2,8 +2,8 @@ import json
 import os
 import time
 
+import config
 from celery import Celery
-
 from Image_Classification import Image_Classification
 from Object_Detection import Object_Detection
 from Response import Response
@@ -15,11 +15,11 @@ celery = Celery('tasks', broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND
 
 
 @celery.task(name='tasks.vera_species_classify')
-def vera_species_classify(request, config):
+def vera_species_classify(request, sender):
     try:
-        response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
+        response = Response(request['Id'], request['Method'], request['Model'])
 
-        species_classification = Image_Classification(request.json['Images'], request.json['Model'], config, request.remote_addr)
+        species_classification = Image_Classification(request['Images'], request['Model'], config.vera_species, sender)
 
         results = species_classification.classification_caller()
 
@@ -31,11 +31,11 @@ def vera_species_classify(request, config):
         raise error
 
 @celery.task(name='tasks.vera_poles_trees_detect')
-def vera_poles_trees_detect():
+def vera_poles_trees_detect(request, sender):
     try:
-        response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
+        response = Response(request['Id'], request['Method'], request['Model'])
 
-        object_detection = Object_Detection(request.json['Images'], request.json['Model'], app.config['vera_poles_trees'], request.remote_addr)
+        object_detection = Object_Detection(request['Images'], request['Model'], config.vera_poles_trees, sender)
 
         results = object_detection.detection_caller()
 
@@ -50,9 +50,9 @@ def vera_poles_trees_detect():
 # @celery.task(name='tasks.vera_species_retrain')
 # def vera_species_retrain():
 #     try:
-#         response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
+#         response = Response(request['Id'], request['Method'], request['Model'])
 
-#         species_classification = Image_Classification(request.json['Images'], request.json['Model'], app.config['vera_species'])
+#         species_classification = Image_Classification(request['Images'], request['Model'], app.config['vera_species'])
 
 #         results = species_classification.classification_caller()
 
