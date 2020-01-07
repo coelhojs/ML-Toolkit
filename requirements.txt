@@ -1,0 +1,4 @@
+Flask
+matplotlib
+Pillow
+tensorflow==1.15.0

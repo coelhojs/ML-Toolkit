@@ -1,6 +1,0 @@
-docker run -it -m 4g --oom-kill-disable --mount type=bind,source=/home/cristiano/development/workspace,target=/research/workspace ml-trainer
-
-
-protoc object_detection/protos/*.proto --python_out=.
-export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
-python3 object_detection/model_main.py --logtostderr --model_dir=workspace/intermediate_files/training --pipeline_config_path=workspace/vera_base_itens.config
