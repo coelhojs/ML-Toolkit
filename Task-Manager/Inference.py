@@ -137,7 +137,7 @@ class Inference:
                 try:
                     image = Image.open(image_path).convert("RGB")
                 except:
-                    raise Exception("Imagem {image_path} nao localizada.".format(image_path=image_path))
+                    raise Exception('Imagem {image_path} nao localizada.'.format(image_path=image_path))
 
                 # Get handles to input and output tensors
                 ops = tf.compat.v1.get_default_graph().get_operations()

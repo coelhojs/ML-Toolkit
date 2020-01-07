@@ -36,8 +36,7 @@ def pre_process(image_path):
         return formatted_json_input
 
     except:
-        raise Exception("Imagem {image_path} nao localizada no caminho informado.".format(
-            image_path=image_path))
+        raise Exception('Imagem {image_path} nao localizada.'.format(image_path=image_path))
 
 
 def post_process(server_response, image_path, labels):
