@@ -1,14 +1,22 @@
 version: "3"
 services:
-    server:
-        build: ./API/
+    api:
+        container_name: api
+        #network_mode: host
+        build: 
+            context: ./API/
+            #network: host
         ports:
             - 5001:5001
         restart: always
         depends_on: 
             - redis
     monitor:
-        build: ./Task-Manager/
+        container_name: monitor
+        #network_mode: host
+        build: 
+            context: ./Task-Manager/
+            #network: host            
         ports:
             - 5555:5555
         entrypoint: flower
@@ -16,8 +24,12 @@ services:
         depends_on:
             - redis
     redis:
+        container_name: redis
+        #network_mode: host
         image: redis
     tf-serving:
+        container_name: tf-serving
+        #network_mode: host
         image: tensorflow/serving
         command: --model_config_file=/models/models.config
         depends_on:
@@ -26,12 +38,17 @@ services:
             - 8501:8501
         restart: always
         volumes:
-            # -  //c/development/ML-Toolkit/Tensorflow-Serving/models:/models/
-            -  /home/cristiano/development/ML-Toolkit/Tensorflow-Serving/models:/models/
+            -  //c/development/ML-Toolkit/Tensorflow-Serving/models:/models/
+            #-  /home/cristiano/development/ML-Toolkit/Tensorflow-Serving/models:/models/
     worker:
+        container_name: worker
         #network_mode: host
         build:
             context: ./Task-Manager/
             dockerfile: Dockerfile
+            #network: host
         depends_on:
             - redis
+        ports:
+            - 5000:5000
+    
