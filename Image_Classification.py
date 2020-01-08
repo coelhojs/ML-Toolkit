@@ -15,7 +15,7 @@ class Image_Classification:
     def classification_caller(self):
         try:
             inference = Inference(self.Config, "image_classification")
-
+            #TODO: Tornar assíncrono neste ponto
             return inference.image_classifier(self.Images)
 
         except Exception as error:
