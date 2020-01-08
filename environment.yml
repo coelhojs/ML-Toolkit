@@ -3,7 +3,7 @@ channels:
     - defaults
 dependencies:
     - Flask
-    - gunicorn
+    - gevent
     - numpy
     - Pillow
     - tensorflow==1.15.0
