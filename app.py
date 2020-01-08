@@ -2,6 +2,7 @@ import json
 
 import config
 from flask import Flask, jsonify, request, url_for
+from waitress import serve
 from Image_Classification import Image_Classification
 from Object_Detection import Object_Detection
 from Response import Response
@@ -64,6 +65,9 @@ def vera_species_retrain():
     except Exception as error:
         raise error
 
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')
+#     #app.run(host='0.0.0.0', threaded=True)
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
-    #app.run(host='0.0.0.0', threaded=True)
+   #app.run() ##Replaced with below code to run it using waitress 
+   serve(app, host='0.0.0.0', port=8000)
