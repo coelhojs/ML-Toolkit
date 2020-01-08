@@ -2,3 +2,4 @@ Flask
 matplotlib
 Pillow
 tensorflow==1.15.0
+tensorflow_hub==1.15.0

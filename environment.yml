@@ -2,7 +2,8 @@ name: vera
 channels:
     - defaults
 dependencies:
-    Flask
-    numpy
-    Pillow
-    tensorflow=1.15.0
+    - Flask
+    - gunicorn
+    - numpy
+    - Pillow
+    - tensorflow==1.15.0

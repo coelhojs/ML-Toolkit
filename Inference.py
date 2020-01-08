@@ -5,6 +5,10 @@ from PIL import Image
 from utils import img_utils
 from utils import ops as utils_ops
 
+#Configuracoes de otimizacao
+config = tf.compat.v1.ConfigProto(allow_soft_placement=True,
+                                intra_op_parallelism_threads=0, 
+                                inter_op_parallelism_threads=0)
 
 class Inference:
     Graph: ""
@@ -36,7 +40,7 @@ class Inference:
             input_operation = self.Graph.get_operation_by_name(input_name)
             output_operation = self.Graph.get_operation_by_name(output_name)
 
-            with tf.compat.v1.Session(graph=self.Graph) as sess:
+            with tf.compat.v1.Session(config=config, graph=self.Graph) as sess:
                 inference = sess.run(output_operation.outputs[0], {
                     input_operation.outputs[0]: t
                 })
@@ -70,7 +74,7 @@ class Inference:
 
     def load_classification_graph(self, model_path):
         graph = tf.Graph()
-        graph_def = tf.GraphDef()
+        graph_def = tf.compat.v1.GraphDef()
 
         with open(model_path, "rb") as f:
             graph_def.ParseFromString(f.read())
@@ -107,7 +111,7 @@ class Inference:
                                     input_std=255):
         input_name = "file_reader"
         output_name = "normalized"
-        file_reader = tf.read_file(image_path, input_name)
+        file_reader = tf.io.read_file(image_path, input_name)
         if image_path.endswith(".png"):
             image_reader = tf.image.decode_png(
                 file_reader, channels=3, name="png_reader")
@@ -122,9 +126,9 @@ class Inference:
 
         float_caster = tf.cast(image_reader, tf.float32)
         dims_expander = tf.expand_dims(float_caster, 0)
-        resized = tf.image.resize_bilinear(dims_expander, [input_height, input_width])
+        resized = tf.compat.v1.image.resize_bilinear(dims_expander, [input_height, input_width])
         normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
-        sess = tf.compat.v1.Session()
+        sess = tf.compat.v1.Session(config=config)
         result = sess.run(normalized)
 
         return result
@@ -132,7 +136,7 @@ class Inference:
 
     def run_inference_for_single_image(self, graph, image_path, labels):
         with graph.as_default():
-            with tf.compat.v1.Session() as sess:
+            with tf.compat.v1.Session(config=config) as sess:
                 try:
                     image = Image.open(image_path).convert("RGB")
                 except:

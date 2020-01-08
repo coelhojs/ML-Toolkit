@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request, url_for
 from Image_Classification import Image_Classification
 from Object_Detection import Object_Detection
 from Response import Response
+from Retrainer import Retrainer
 
 app = Flask(__name__)
 
@@ -47,18 +48,22 @@ def vera_poles_trees_detect():
         raise error
 
 
-# @app.route('/vera_species/retrain/', methods=['POST'])
-# def vera_species_retrain():
-#     try:
-#         response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
+@app.route('/vera_species/retrain/', methods=['POST'])
+def vera_species_retrain():
+    try:
+        response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
 
-#         species_classification = Image_Classification(request.json['Images'], request.json['Model'], app.config['vera_species'])
+        retraining = Retrainer(request.json['Workspace'], request.json['Steps'])
 
-#         results = species_classification.classification_caller()
+        results = retraining.image_classification_retrainer()
 
-#         response.set_results(results)
+        response.set_results(results)
 
-#         return json.dumps(response.__dict__)
+        return json.dumps(response.__dict__)
 
-#     except Exception as error:
-#         raise error
+    except Exception as error:
+        raise error
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+    # app.run(host='0.0.0.0', threaded=True)
