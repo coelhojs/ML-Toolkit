@@ -66,9 +66,9 @@ def post_process(server_response, image_path, labels):
     # Formatando resultado para o modelo esperado pelo Vera
     inference_dict = {}
     inference_dict['ImagePath'] = image_path
-    inference_dict['Class'] = output_dict['detection_classes']
+    inference_dict['Classes'] = output_dict['detection_classes']
     inference_dict['BoundingBoxes'] = output_dict['detection_boxes'].tolist()
-    inference_dict['Score'] = np.array(output_dict['detection_scores']).tolist()
+    inference_dict['Scores'] = np.array(output_dict['detection_scores']).tolist()
     inference_dict['NumDetections'] = output_dict['num_detections']
 
     return inference_dict
