@@ -15,10 +15,10 @@ app = Flask(__name__)
 def vera_species_classify():
     try:
         response = Response(
-            request.json['Id'], request.json['Method'], request.json['Model'])
+            request.json['Id'], request.json['UserToken'])
 
         species_classification = Image_Classification(
-            request.json['Images'], request.json['Model'], config.vera_species, request.remote_addr)
+            request.json['Images'], config.vera_species, request.remote_addr)
 
         results = species_classification.classification_caller()
 
@@ -34,10 +34,10 @@ def vera_species_classify():
 def vera_poles_trees_detect():
     try:
         response = Response(
-            request.json['Id'], request.json['Method'], request.json['Model'])
+            request.json['Id'], request.json['UserToken'])
 
         object_detection = Object_Detection(
-            request.json['Images'], request.json['Model'], config.vera_poles_trees, request.remote_addr)
+            request.json['Images'], config.vera_poles_trees, request.remote_addr)
 
         results = object_detection.detection_caller()
 
@@ -52,7 +52,8 @@ def vera_poles_trees_detect():
 @app.route('/vera_species/retrain/', methods=['POST'])
 def vera_species_retrain():
     try:
-        response = Response(request.json['Id'], request.json['Method'], request.json['Model'])
+        response = Response(
+            request.json['Id'], request.json['UserToken'])
 
         retraining = Retrainer(request.json['Workspace'], request.json['Steps'])
 
@@ -70,4 +71,4 @@ def vera_species_retrain():
 #     #app.run(host='0.0.0.0', threaded=True)
 if __name__ == "__main__":
    #app.run() ##Replaced with below code to run it using waitress 
-   serve(app, host='0.0.0.0', port=8000)
+   serve(app, host='0.0.0.0', port=5000)

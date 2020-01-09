@@ -7,9 +7,8 @@ class Image_Classification:
     Images: []
     Model: ""
 
-    def __init__(self, images, model, config, remote_addr):
+    def __init__(self, images, config, remote_addr):
         self.Images = img_utils.validate_paths(images, remote_addr)
-        self.Model = model
         self.Config = config
 
     def classification_caller(self):

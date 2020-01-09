@@ -77,6 +77,7 @@ def post_process(server_response, image_path, labels):
 def validate_paths(images, remote_addr):
     newList = []
     for imagepath in images:
+        imagepath = imagepath.replace('\\', '/')
         if ("C:" in imagepath):
             newPath = imagepath.replace(
                 "C:/", "//{remote_addr}/c/".format(remote_addr=remote_addr))

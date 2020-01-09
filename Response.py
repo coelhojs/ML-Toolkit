@@ -5,11 +5,10 @@ class Response:
     Results = []
 
     # default constructor 
-    def __init__(self, requestId, method, model): 
+    def __init__(self, requestId, userToken): 
         self.RequestId = requestId
-        self.Method = method
-        self.Model = model
         self.Results = []
+        self.UserToken = userToken
 
 
     def add_results(self, image_path, results): 
